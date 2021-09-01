@@ -6,8 +6,7 @@ class BmiScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueAccent,
-      body: SafeArea(
-        child: Container(
+      body: SafeArea(child: Container(
           child: Column(
             children: [
               Expanded(
@@ -17,8 +16,9 @@ class BmiScreen extends StatelessWidget {
                       BmiCard(
                         cardChild: Column(
                           children: [
+                            Icon(Icons.male, size :20 , color:Colors.white),
 
-                          ],
+                            ],
                         ),
                       ),
                       BmiCard(
@@ -32,12 +32,15 @@ class BmiScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              BmiCard(
-                cardChild: Column(
-                  children: [
-
-                  ],
-                ),
+              Expanded(
+                child: Container(
+                  // color: Colors.indigo,
+                  child: BmiCard(
+                    cardChild: Row(
+                      children: [],
+                    ),
+                  ),
+                )
               ),
               Expanded(
                 child: Container(
