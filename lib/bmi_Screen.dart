@@ -94,10 +94,10 @@ class _BmiScreenState extends State<BmiScreen> {
                               activeTrackColor: Colors.indigo,
                               thumbColor: Colors.deepPurple,
                               overlayColor: Colors.indigoAccent,
-                              overlayShape:
-                                  RoundSliderOverlayShape(overlayRadius: 30),
                               thumbShape:
                                   RoundSliderThumbShape(enabledThumbRadius: 15),
+                              overlayShape:
+                                  RoundSliderOverlayShape(overlayRadius: 30),
                             ),
                             child: Slider(
                               value: hight.toDouble(),
