@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class BmiCard extends StatelessWidget {
- final Widget cardChild;
- BmiCard({required this.cardChild});
+ final Widget? cardChild;
+ BmiCard({ this.cardChild});
 
 
   @override

@@ -30,15 +30,8 @@ class BmiScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
-                child: Container(
-                  // color: Colors.indigo,
-                  child: BmiCard(
-                    cardChild: Row(
-                      children: [],
-                    ),
-                  ),
-                )
+              BmiCard(
+
               ),
               Expanded(
                 child: Container(
