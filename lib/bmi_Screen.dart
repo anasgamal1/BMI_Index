@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import'bmi_card.dart';
+import 'gender_card.dart';
+
 
 class BmiScreen extends StatelessWidget {
   @override
@@ -14,19 +17,14 @@ class BmiScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       BmiCard(
-                        cardChild: Column(
-                          children: [
-                            Icon(Icons.male, size :20 , color:Colors.white),
-
-                            ],
-                        ),
+                        cardChild: GenderCard(name:'Male',genderIcon: Icons.male, ontap:(){
+                          print('male');
+                        },),
                       ),
                       BmiCard(
-                        cardChild: Column(
-                          children: [
-
-                          ],
-                        ),
+                        cardChild: GenderCard(name:'Female',genderIcon: Icons.female ,ontap:(){
+                      print('female');
+                      },),
                       ),
                     ], //children
                   ),
@@ -71,4 +69,6 @@ class BmiScreen extends StatelessWidget {
     );
   }
 }
+
+
 
