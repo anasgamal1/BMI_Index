@@ -7,6 +7,11 @@ enum Gender {
   male,
   female,
 }
+const textStyle =
+    TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w900);
+
+const numberStyle =
+    TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 60);
 
 class BmiScreen extends StatefulWidget {
   @override
@@ -16,6 +21,8 @@ class BmiScreen extends StatefulWidget {
 class _BmiScreenState extends State<BmiScreen> {
   Gender selectGender = Gender.female;
   int height = 182;
+  int weight = 80;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,32 +92,33 @@ class _BmiScreenState extends State<BmiScreen> {
                           'cm',
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: 50,
+                              fontSize: 35,
                               fontWeight: FontWeight.w900),
                         ),
-                        SliderTheme(
-                            data: SliderTheme.of(context).copyWith(
-                              inactiveTrackColor: Colors.blueAccent,
-                              activeTrackColor: Colors.indigo,
-                              thumbColor: Colors.deepPurple,
-                              overlayColor: Colors.indigoAccent,
-                              thumbShape:
-                                  RoundSliderThumbShape(enabledThumbRadius: 15),
-                              overlayShape:
-                                  RoundSliderOverlayShape(overlayRadius: 30),
-                            ),
-                            child: Slider(
-                              value: height.toDouble(),
-                              min: 120,
-                              max: 220,
-                              onChanged: (double value) {
-                                setState(() {
-                                  height = value.round();
-                                });
-                              },
-                            )),
                       ],
-                    )
+                    ),
+                    SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          inactiveTrackColor: Colors.blueAccent,
+                          activeTrackColor: Colors.white,
+                          thumbColor: Colors.deepPurple,
+                          overlayColor: Colors.indigoAccent,
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 15),
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 30),
+                        ),
+                        child: Slider(
+                          value: height.toDouble(),
+                          min: 120,
+                          max: 220,
+                          onChanged: (double value) {
+                            setState(() {
+                              height = value.round();
+                            });
+                          },
+                        )),
+                    Text('Height', style: textStyle),
                   ],
                 ),
               ),
@@ -120,7 +128,49 @@ class _BmiScreenState extends State<BmiScreen> {
                     children: [
                       BmiCard(
                         cardChild: Column(
-                          children: [],
+                          children: [
+                            Text(
+                              'Weight',
+                              style: textStyle,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              '$weight',
+                              style: numberStyle,
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                RoundButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      weight++;
+                                    });
+                                  },
+                                  buttonIcon: Icons.add,
+                                ),
+                                SizedBox(
+                                  width: 30,
+                                ),
+                                RoundButton(
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        weight--;
+                                      },
+                                    );
+                                  },
+                                  buttonIcon: Icons.remove,
+                                  // buttonIcon: Icon(Icon.add),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                       BmiCard(
@@ -135,6 +185,30 @@ class _BmiScreenState extends State<BmiScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class RoundButton extends StatelessWidget {
+  final Function onPressed;
+  final IconData buttonIcon;
+  RoundButton({this.buttonIcon, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      fillColor: Colors.lightBlue,
+      constraints: BoxConstraints.tightFor(width: 56, height: 56),
+      elevation: 6.0,
+      onPressed: onPressed,
+      child: Icon(
+        buttonIcon,
+        color: Colors.white,
+        size: 50,
       ),
     );
   }
