@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'bmi_card.dart';
 import 'gender_card.dart';
+import 'round_button.dart';
+import 'calculate_screen.dart';
+import 'bmi_brain.dart';
 
 enum Gender {
   male,
@@ -22,7 +25,7 @@ class _BmiScreenState extends State<BmiScreen> {
   Gender selectGender = Gender.female;
   int height = 182;
   int weight = 80;
-
+  int age = 20;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +33,7 @@ class _BmiScreenState extends State<BmiScreen> {
       body: SafeArea(
         child: Container(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
                 child: Container(
@@ -175,10 +179,75 @@ class _BmiScreenState extends State<BmiScreen> {
                       ),
                       BmiCard(
                         cardChild: Column(
-                          children: [],
+                          children: [
+                            Text(
+                              'Age',
+                              style: textStyle,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              '$age',
+                              style: numberStyle,
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                RoundButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      age++;
+                                    });
+                                  },
+                                  buttonIcon: Icons.add,
+                                ),
+                                SizedBox(
+                                  width: 30,
+                                ),
+                                RoundButton(
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        age--;
+                                      },
+                                    );
+                                  },
+                                  buttonIcon: Icons.remove,
+                                  // buttonIcon: Icon(Icon.add),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ], //children
+                  ),
+                ),
+              ),
+              FlatButton(
+                onPressed: () {
+                  Calculation cal = Calculation(height: height, weight: weight);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CalculateScreen(
+                      bmiNumber: cal.bmiCal(),
+                      bmiMasg: cal.bmiMsg(),
+                      bmiResult: cal.bmiResult(),
+                    );
+                  }));
+                },
+                child: Container(
+                  height: 60,
+                  decoration: BoxDecoration(color: Colors.pink),
+                  child: Center(
+                    child: Text('Calculate',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 40,
+                            fontWeight: FontWeight.w900)),
                   ),
                 ),
               ),
@@ -190,7 +259,7 @@ class _BmiScreenState extends State<BmiScreen> {
   }
 }
 
-class RoundButton extends StatelessWidget {
+/*class RoundButton extends StatelessWidget {
   final Function onPressed;
   final IconData buttonIcon;
   RoundButton({this.buttonIcon, this.onPressed});
@@ -212,4 +281,4 @@ class RoundButton extends StatelessWidget {
       ),
     );
   }
-}
+}*/
