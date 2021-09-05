@@ -15,7 +15,7 @@ class BmiScreen extends StatefulWidget {
 
 class _BmiScreenState extends State<BmiScreen> {
   Gender selectGender = Gender.female;
-  double hight = 182;
+  int height = 182;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +75,7 @@ class _BmiScreenState extends State<BmiScreen> {
                       textBaseline: TextBaseline.alphabetic,
                       children: [
                         Text(
-                          "$hight",
+                          "$height",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 60,
@@ -100,12 +100,12 @@ class _BmiScreenState extends State<BmiScreen> {
                                   RoundSliderOverlayShape(overlayRadius: 30),
                             ),
                             child: Slider(
-                              value: hight.toDouble(),
+                              value: height.toDouble(),
                               min: 120,
                               max: 220,
                               onChanged: (double value) {
                                 setState(() {
-                                  hight = value.round() as double;
+                                  height = value.round();
                                 });
                               },
                             )),
